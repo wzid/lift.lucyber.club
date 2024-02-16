@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  color: #fff;
+  background: #171717
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+
+h1 {
+  @apply font-bold text-3xl
+}
+
+h2 {
+  @apply font-bold text-2xl
+}
+
+
+
+/* Fix the button so default is white and also no click animation */
+.btn {
+  @apply text-base font-normal h-10 min-h-[2.5rem] px-4 bg-white text-black hover:bg-white/80 hover:text-black/80 animate-none transition-colors;
+}
+
+.btn-lg {
+  @apply h-12 min-h-[3rem] 
+}
+
+.btn:active:focus {
+  @apply animate-none transform-none;
+}
+
+.btn-green {
+  @apply bg-green-600 hover:bg-green-600/80 text-green-100 hover:text-green-100/60;
+}
+
+.btn-dark-blue {
+  @apply bg-dark-blue-600 hover:bg-dark-blue-600/80 text-dark-blue-100 hover:text-dark-blue-100/40;
+}
+
+.btn-blue {
+  @apply bg-blue-600 hover:bg-blue-600/80 text-blue-100 hover:text-blue-100/80;
+}
+
+.btn-default {
+  @apply bg-background-900 border-background-600 text-white hover:text-white hover:bg-background-600 hover:border-background-600;
+}
