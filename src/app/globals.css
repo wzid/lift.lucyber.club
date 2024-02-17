@@ -4,7 +4,7 @@
 
 body {
   color: #fff;
-  background: #171717
+  background: #000212
 }
 
 @layer utilities {
@@ -54,4 +54,8 @@ h3 {
 
 .btn-default {
   @apply bg-background-900 border-background-600 text-white hover:text-white hover:bg-background-600 hover:border-background-600;
+}
+
+.gradient-radial {
+  background: radial-gradient(ellipse 80% 50% at 50% -20%,rgba(72,191,132,0.3),hsla(0, 0%, 100%, 0));
 }

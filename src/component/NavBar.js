@@ -36,9 +36,8 @@ export default function NavBar() {
       </Link>
       <div className="flex gap-3 sm:gap-6 text-lg">
         {navLinks.map(({ name, path }) => {
-          const text_color = path === currentPath ? 'text-white' : 'text-foreground/60';
           return (
-            <a href={path} key={name} className={clsx("hover:text-foreground/80 transition-colors", text_color)}>{name}</a>
+            <a href={path} key={name} className="hover:text-foreground/80 text-white transition-colors">{name}</a>
           );
         })}
       </div>
