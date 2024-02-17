@@ -9,9 +9,9 @@
           ".validate": "newData.isString() && newData.val().length < 28"
         },
         "imageURL": { ".validate": true },
-        "bench": { ".validate": "newData.val() < 1000" },
-        "squat": { ".validate": "newData.val() < 1000" },
-        "deadlift": { ".validate": "newData.val() < 1000" },
+        "bench": { ".validate": "newData.isNumber() && newData.val() < 1000 && newData.val() >= 0" },
+        "squat": { ".validate": "newData.isNumber() && newData.val() < 1000 && newData.val() >= 0" },
+        "deadlift": { ".validate": "newData.isNumber() && newData.val() < 1000 && newData.val() >= 0" },
         "$other": { ".validate": false }
       }
     }

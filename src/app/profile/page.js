@@ -19,6 +19,21 @@ export default function Profile() {
 
   const userRef = ref(db, "users/" + currentUser?.uid);
 
+  function showAlert(type, message) {
+    if (type === "success") {
+      let icon = `<svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`
+      document.getElementById("alert-success").style.visibility = "visible";
+      document.getElementById("alert-success").innerHTML = `${icon} <p>${message}</p>`;
+      setTimeout(() => {document.getElementById("alert-success").style.visibility = "hidden";}, 3000);
+    } else if (type === "error") {
+      console.log("Error: ", message);
+      document.getElementById("alert-error").style.visibility = "visible";
+      let icon = `<svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`
+      document.getElementById("alert-error").innerHTML = `${icon} <p>${message}</p>`;
+      setTimeout(() => {document.getElementById("alert-error").style.visibility = "hidden";}, 3000);
+    }
+  }
+
   useEffect(() => {
     if (currentUser === null || currentUser === undefined) {
       return;
@@ -63,36 +78,18 @@ export default function Profile() {
     e.preventDefault();
 
     if (bench === undefined || deadlift === undefined || squat === undefined) {
-      document.getElementById("alert").style.background = "#FF375F";
-      document.getElementById(
-        "alert"
-      ).innerHTML = `<i class="mr-2 fa-solid fa-triangle-exclamation"></i>Enter a value for squat, deadlift, and bench`;
-      document.getElementById("alert").style.visibility = "visible";
-      setTimeout(() => {
-        document.getElementById("alert").style.visibility = "hidden";
-      }, 3000);
-    }
-
-    if (bench > 1000 || squat > 1000 || deadlift > 1000) {
-      document.getElementById("alert").style.background = "#FF375F";
-      document.getElementById(
-        "alert"
-      ).innerHTML = `<i class="mr-2 fa-solid fa-triangle-exclamation"></i>Stop lying smh`;
-      document.getElementById("alert").style.visibility = "visible";
-      setTimeout(() => {
-        document.getElementById("alert").style.visibility = "hidden";
-      }, 3000);
-    }
-
-    if (name.length >= 28) {
-      document.getElementById("alert").style.background = "#FF375F";
-      document.getElementById(
-        "alert"
-      ).innerHTML = `<i class="mr-2 fa-solid fa-triangle-exclamation"></i>Name must be less than 28 characters`;
-      document.getElementById("alert").style.visibility = "visible";
-      setTimeout(() => {
-        document.getElementById("alert").style.visibility = "hidden";
-      }, 3000);
+      showAlert("error", "Please enter a number");
+    } else if (bench > 1000) {
+      showAlert("don't lie about your bench")
+    } else if (squat > 1000) {
+      showAlert("don't lie about your squat")
+    } else if (deadlift > 1000) {
+      showAlert("error", "don't lie about your deadlift");
+    } else if (name.length >= 28) {
+      showAlert("error", "Name too long");
+    } else if (bench < 0 || squat < 0 || deadlift < 0) {
+      showAlert("error", "How are you lifting negative weight?");
+      console.log(bench, squat, deadlift);
     } else {
       get(userRef).then((snapshot) => {
         let userData;
@@ -102,27 +99,22 @@ export default function Profile() {
           userData.name = name;
           // We remove the last 6 characters so that the photo is full resolution
           userData.imageURL = currentUser.providerData[0].photoURL.slice(0, -6);
-          userData.deadlift = deadlift;
-          userData.squat = squat;
-          userData.bench = bench;
+          userData.deadlift = parseInt(deadlift);
+          userData.squat = parseInt(squat);
+          userData.bench = parseInt(bench);
         } else {
           userData = {
             name: name,
             imageURL: currentUser.providerData[0].photoURL.slice(0, -6),
-            bench: bench,
-            squat: squat,
-            deadlift: deadlift,
+            bench: parseInt(bench),
+            squat: parseInt(squat),
+            deadlift: parseInt(deadlift),
           };
         }
 
         set(userRef, userData);
 
-        document.getElementById("alert").style.background = "#43a047";
-        document.getElementById("alert").innerHTML = `<i class="mr-2 fa-solid fa-check"></i>Profile Saved`;
-        document.getElementById("alert").style.visibility = "visible";
-        setTimeout(() => {
-          document.getElementById("alert").style.visibility = "hidden";
-        }, 3000);
+        showAlert("success", "Profile Saved");
       });
     }
   };
@@ -216,10 +208,22 @@ export default function Profile() {
         </div>
       )}
       <div
-        id="alert"
-        className="w-fit mt-12 text-text_color font-bold text-base lg:text-lg pt-2 pb-1 px-2 rounded-lg invisible"
+        id="alert-success"
+        role="alert"
+        style={{ visibility: "hidden" }}
+        className="alert alert-success mt-10"
       >
+          <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
         Profile Saved
+      </div>
+      <div
+        id="alert-error"
+        role="alert"
+        style={{ visibility: "hidden" }}
+        className="alert alert-error mt-10"
+      >
+        
+        Error
       </div>
     </div>
   );
