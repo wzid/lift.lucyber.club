@@ -22,6 +22,9 @@ h2 {
   @apply font-bold text-2xl
 }
 
+h3 {
+  @apply font-bold text-lg
+}
 
 
 /* Fix the button so default is white and also no click animation */

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Leaderboard from '../component/Leaderboard';
 
 export default function Home() {
   return (
@@ -17,6 +18,9 @@ export default function Home() {
           <p className="text-background-400 text-xl">&quot;This website has helped me tremendously in my personal fitness journey&quot;</p>
         </div>
       </div>
+    </div>
+    <div>
+      <Leaderboard />
     </div>
 
    </main>

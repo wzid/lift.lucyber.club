@@ -1,6 +1,19 @@
 {
   "rules": {
-    ".read": "now < 1710648000000",  // 2024-3-17
-    ".write": "now < 1710648000000",  // 2024-3-17
+    "users": {
+      ".read": "true",
+      "$uid": {
+        ".read": "true",
+        ".write": "auth != null && $uid === auth.uid",
+        "name": {
+          ".validate": "newData.isString() && newData.val().length < 28"
+        },
+        "imageURL": { ".validate": true },
+        "bench": { ".validate": "newData.val() < 1000" },
+        "squat": { ".validate": "newData.val() < 1000" },
+        "deadlift": { ".validate": "newData.val() < 1000" },
+        "$other": { ".validate": false }
+      }
+    }
   }
 }
