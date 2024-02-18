@@ -41,7 +41,7 @@ export default function NavBar() {
             <a href={path} key={name} className="hover:text-foreground/80 text-white transition-colors">{name}</a>
           );
         })}
-        <a href="https://github.com/wzid"> <Icon icon="mdi:github" width="30" height="30" className="transition-opacity hover:opacity-85" /></a>
+        <a href="https://github.com/wzid"> <Icon icon="mdi:github" width="30" height="30" className="transition-opacity hover:opacity-80" /></a>
       </div>
     </div>
   );
