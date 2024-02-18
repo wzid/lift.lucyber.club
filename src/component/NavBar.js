@@ -28,6 +28,10 @@ export default function NavBar() {
             path: "/auth/login/",
           },
         ]),
+        {
+          name: "GitHub",
+          path: "https://github.com/wzid"
+        }
   ];
   return (
     <div className="w-full flex justify-between items-center pb-12 md:pb-12 sm:text-base md:text-lg mt-4">
