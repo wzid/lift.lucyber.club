@@ -4,6 +4,7 @@ import React, { useContext } from "react";
 import Link from "next/link";
 import { AuthContext } from "./AuthProvider";
 import { usePathname } from "next/navigation";
+import { Icon } from "@iconify/react";
 import clsx from 'clsx';
 
 export default function NavBar() {
@@ -28,10 +29,6 @@ export default function NavBar() {
             path: "/auth/login/",
           },
         ]),
-        {
-          name: "GitHub",
-          path: "https://github.com/wzid"
-        }
   ];
   return (
     <div className="w-full flex justify-between items-center pb-12 md:pb-12 sm:text-base md:text-lg mt-4">
@@ -44,6 +41,7 @@ export default function NavBar() {
             <a href={path} key={name} className="hover:text-foreground/80 text-white transition-colors">{name}</a>
           );
         })}
+        <a href="https://github.com/wzid"> <Icon icon="mdi:github" width="30" height="30" className="transition-opacity hover:opacity-85" /></a>
       </div>
     </div>
   );
