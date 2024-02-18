@@ -44,8 +44,7 @@ export default function Leaderboard() {
   return (
     <div className="flex flex-col w-full items-center text-sm lg:text-base pb-12">
       <div className="text-center pb-6">
-        <h2 className="pb-1">Leaderboard</h2>
-        <p className="text-foreground/70">Look at these guys</p>
+        <h1 className="pb-1">Leaderboard</h1>
       </div>
       <div className="form-control w-full lg:w-11/12 pb-4">
         <div className="input-group justify-center md:justify-end">
@@ -115,7 +114,7 @@ export default function Leaderboard() {
                         />
                       )}
                       <div className="flex flex-col ml-4">
-                        <h3 className="text-xl">{item.name}</h3>
+                        <h3 className="md:text-xl">{item.name}</h3>
                       </div>
                     </td>
                     <td className="text-center">
