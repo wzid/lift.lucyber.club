@@ -8,8 +8,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Lift your cyber skills",
-  description: "made with ❤️ by cameron",
+  title: "LU Cyber Lifts",
+  description: "Record your lifts. Crush your opposition. Made with ❤️ by cameron",
 };
 
 export default function RootLayout({
